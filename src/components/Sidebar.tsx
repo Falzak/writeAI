@@ -47,9 +47,9 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   if (!user) {
     return (
       <>
-        <div className="w-64 h-full flex flex-col transition-colors duration-200">
+        <div className="w-64 h-full flex flex-col transition-colors duration-200 p-2">
           {/* Logo */}
-          <div className="p-6 border-b border-gray-600 dark:border-gray-700">
+          <div className="p-4 mb-2">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
@@ -62,7 +62,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           </div>
 
           {/* Search */}
-          <div className="p-4 border-b border-gray-600 dark:border-gray-700">
+          <div className="px-4 py-3 mx-2 border-t border-gray-600 dark:border-gray-700">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
               <input
@@ -95,7 +95,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           </nav>
 
           {/* Bottom Actions */}
-          <div className="p-4 border-t border-gray-600 dark:border-gray-700 space-y-4">
+          <div className="px-4 py-3 mx-2 mt-2 border-t border-gray-600 dark:border-gray-700 space-y-4">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -141,9 +141,9 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   }
 
   return (
-    <div className="w-64 h-full flex flex-col transition-colors duration-200">
+    <div className="w-64 h-full flex flex-col transition-colors duration-200 p-2">
       {/* Logo */}
-      <div className="p-6 border-b border-gray-600 dark:border-gray-700">
+      <div className="p-4 mb-2">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
             <Zap className="w-5 h-5 text-white" />
@@ -156,7 +156,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
       </div>
 
       {/* Search */}
-      <div className="p-4 border-b border-gray-600 dark:border-gray-700">
+      <div className="px-4 py-3 mx-2 border-t border-gray-600 dark:border-gray-700">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-4 h-4" />
           <input
@@ -192,7 +192,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
       </nav>
 
       {/* User Section */}
-      <div className="p-4 border-t border-gray-600 dark:border-gray-700 space-y-4">
+      <div className="px-4 py-3 mx-2 mt-2 border-t border-gray-600 dark:border-gray-700 space-y-4">
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}

@@ -56,7 +56,7 @@ function AppContent() {
       />
 
       <div className="flex-1 p-2 overflow-hidden">
-        <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto border border-gray-300 dark:border-gray-700">
+        <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto">
           {renderContent()}
         </main>
       </div>
