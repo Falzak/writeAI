@@ -2,7 +2,7 @@
   # Generate Text Edge Function
   
   Esta função integra com a API da OpenAI para gerar conteúdo baseado em prompts.
-  Suporta diferentes tipos de ferramentas de escrita.
+  Suporta diferentes tipos de ferramentas de escrita e chat.
 */
 
 import { corsHeaders } from '../_shared/cors.ts';
@@ -41,7 +41,9 @@ const getSystemPrompt = (toolType: string, language: string = 'pt-BR'): string =
     
     'product': `Você é um copywriter especializado em descrições de produtos. Crie textos persuasivos que destacam benefícios, características e criam urgência de compra. Responda em ${language}.`,
     
-    'correction': `Você é um revisor especialista. Corrija erros gramaticais, ortográficos e de estilo, mantendo o tom original do texto. Responda em ${language}.`
+    'correction': `Você é um revisor especialista. Corrija erros gramaticais, ortográficos e de estilo, mantendo o tom original do texto. Responda em ${language}.`,
+    
+    'chat': `Você é um assistente de IA útil, inteligente e amigável. Responda de forma clara, precisa e útil. Seja conversacional mas profissional. Responda em ${language}.`
   };
 
   return prompts[toolType] || `Você é um assistente de escrita especializado. Ajude com a criação de conteúdo de qualidade. Responda em ${language}.`;

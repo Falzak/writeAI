@@ -14,6 +14,7 @@ import {
   Settings as SettingsIcon,
   Sun,
   Moon,
+  MessageCircle,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useTheme } from "../contexts/ThemeContext";
@@ -32,6 +33,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
 
   const menuItems = [
     { id: "dashboard", name: "Dashboard", icon: BarChart3 },
+    { id: "chat", name: "AI Chat", icon: MessageCircle },
     { id: "tools", name: "Writing Tools", icon: PenTool },
     { id: "audio", name: "Text-to-Speech", icon: Volume2 },
     { id: "projects", name: "Projects", icon: FileText },

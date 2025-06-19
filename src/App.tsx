@@ -4,6 +4,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { Sidebar } from "./components/Sidebar";
 import { Dashboard } from "./components/Dashboard";
+import { AIChat } from "./components/AIChat";
 import { WritingTools } from "./components/WritingTools";
 import { WritingEditor } from "./components/WritingEditor";
 import { TextToSpeech } from "./components/TextToSpeech";
@@ -33,6 +34,8 @@ function AppContent() {
     switch (activeSection) {
       case "dashboard":
         return <Dashboard />;
+      case "chat":
+        return <AIChat />;
       case "tools":
         return <WritingTools onToolSelect={handleToolSelect} />;
       case "audio":
