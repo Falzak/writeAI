@@ -44,37 +44,57 @@ export function Dashboard() {
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [toolUsage, setToolUsage] = useState<ToolUsage[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user) {
-      loadDashboardData();
-    }
-  }, [user]);
+    let isMounted = true;
+    
+    const loadDashboardData = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
-  const loadDashboardData = async () => {
-    if (!user) return;
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Load data in parallel with timeout
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout')), 10000)
+        );
 
-    try {
-      setLoading(true);
-      
-      const { data: projects } = await db.getProjects(user.id);
-      const { data: analytics } = await db.getUsageAnalytics(user.id, 30);
-      const { data: audioGens } = await db.getAudioGenerations(user.id);
+        const dataPromise = Promise.all([
+          db.getProjects(user.id),
+          db.getUsageAnalytics(user.id, 30),
+          db.getAudioGenerations(user.id)
+        ]);
 
-      if (projects) {
+        const [projectsResult, analyticsResult, audioResult] = await Promise.race([
+          dataPromise,
+          timeoutPromise
+        ]) as any;
+
+        if (!isMounted) return;
+
+        const projects = projectsResult?.data || [];
+        const analytics = analyticsResult?.data || [];
+        const audioGens = audioResult?.data || [];
+
+        // Calculate date ranges
         const now = new Date();
         const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
         const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
         const totalProjects = projects.length;
-        const totalWords = projects.reduce((acc, p) => acc + (p.word_count || 0), 0);
-        const completedProjects = projects.filter(p => p.status === 'completed').length;
-        const weeklyProjects = projects.filter(p => 
+        const totalWords = projects.reduce((acc: number, p: any) => acc + (p.word_count || 0), 0);
+        const completedProjects = projects.filter((p: any) => p.status === 'completed').length;
+        const weeklyProjects = projects.filter((p: any) => 
           new Date(p.created_at) >= oneWeekAgo
         ).length;
         const monthlyWords = projects
-          .filter(p => new Date(p.created_at) >= oneMonthAgo)
-          .reduce((acc, p) => acc + (p.word_count || 0), 0);
+          .filter((p: any) => new Date(p.created_at) >= oneMonthAgo)
+          .reduce((acc: number, p: any) => acc + (p.word_count || 0), 0);
         const averageWordsPerProject = totalProjects > 0 ? Math.round(totalWords / totalProjects) : 0;
         
         const completionRate = totalProjects > 0 ? (completedProjects / totalProjects) * 100 : 0;
@@ -99,7 +119,7 @@ export function Dashboard() {
 
         const activity = projects
           .slice(0, 4)
-          .map(project => ({
+          .map((project: any) => ({
             type: project.tool_type,
             title: project.title,
             time: formatRelativeTime(project.updated_at),
@@ -108,7 +128,7 @@ export function Dashboard() {
           }));
         setRecentActivity(activity);
 
-        const toolCounts = projects.reduce((acc, project) => {
+        const toolCounts = projects.reduce((acc: any, project: any) => {
           const tool = project.tool_type;
           acc[tool] = (acc[tool] || 0) + 1;
           return acc;
@@ -117,21 +137,32 @@ export function Dashboard() {
         const toolUsageData = Object.entries(toolCounts)
           .map(([tool, count]) => ({
             name: getToolDisplayName(tool),
-            count,
-            percentage: Math.round((count / totalProjects) * 100),
+            count: count as number,
+            percentage: Math.round(((count as number) / totalProjects) * 100),
             color: getToolColor(tool)
           }))
           .sort((a, b) => b.count - a.count)
           .slice(0, 4);
 
         setToolUsage(toolUsageData);
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+        if (isMounted) {
+          setError('Failed to load dashboard data');
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    loadDashboardData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [user?.id]); // Only depend on user.id to prevent unnecessary re-renders
 
   const formatRelativeTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -227,7 +258,7 @@ export function Dashboard() {
 
   if (loading) {
     return (
-      <div className="p-6 space-y-6">
+      <div className="p-8 space-y-6">
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-xl w-1/3 mb-2"></div>
           <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded-xl w-1/2 mb-6"></div>
@@ -241,13 +272,30 @@ export function Dashboard() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="p-8">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center">
+          <h3 className="text-lg font-medium text-red-800 dark:text-red-400 mb-2">Error Loading Dashboard</h3>
+          <p className="text-red-600 dark:text-red-300">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-6 space-y-6 transition-colors duration-200">
+    <div className="p-8 space-y-8 transition-colors duration-200">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Hello, {profile?.full_name || 'User'}! 👋
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-gray-600 dark:text-gray-400 text-lg">
           {stats.totalProjects > 0 
             ? `You've created ${stats.totalProjects} projects and generated ${formatNumber(stats.totalWords)} words!`
             : 'Start by creating your first project with our AI tools.'
@@ -260,7 +308,7 @@ export function Dashboard() {
         {statsData.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 hover:shadow-lg dark:hover:shadow-gray-900/20 transition-all duration-200">
+            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg dark:hover:shadow-gray-900/20 transition-all duration-200">
               <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center shadow-sm`}>
                   <Icon className="w-6 h-6 text-white" />
@@ -278,14 +326,14 @@ export function Dashboard() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Activity */}
-        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
           <div className="space-y-4">
             {recentActivity.length > 0 ? (
               recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600/50 transition-all duration-200">
+                <div key={index} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200">
                   <div className={`w-10 h-10 bg-gradient-to-br ${getToolColor(activity.tool_type)} rounded-xl flex items-center justify-center shadow-sm`}>
                     <span className="text-white text-xs font-medium">
                       {getToolDisplayName(activity.tool_type)[0]?.toUpperCase()}
@@ -317,7 +365,7 @@ export function Dashboard() {
         </div>
 
         {/* Tool Usage */}
-        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Most Used Tools</h2>
           <div className="space-y-4">
             {toolUsage.length > 0 ? (
@@ -350,7 +398,7 @@ export function Dashboard() {
       </div>
 
       {/* Productivity & Plan Status */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Productivity Score */}
         <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between mb-4">
@@ -381,7 +429,7 @@ export function Dashboard() {
         </div>
 
         {/* Plan Status */}
-        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Award className="w-8 h-8 text-yellow-500" />
