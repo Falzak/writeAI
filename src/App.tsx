@@ -50,11 +50,9 @@ function AppContent() {
 
   return (
     <div className="h-screen bg-gray-800 dark:bg-gray-900 flex transition-colors duration-200">
-      <div className="p-4">
-        <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-      </div>
+      <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <div className="flex-1 p-4 pl-0 overflow-hidden">
+      <div className="flex-1 p-4 overflow-hidden">
         <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto">
           {renderContent()}
         </main>

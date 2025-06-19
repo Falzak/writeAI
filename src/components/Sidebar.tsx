@@ -47,7 +47,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   if (!user) {
     return (
       <>
-        <div className="w-80 bg-gray-700 dark:bg-gray-800 rounded-xl h-full flex flex-col transition-colors duration-200 shadow-lg">
+        <div className="w-80 bg-gray-700 dark:bg-gray-800 h-full flex flex-col transition-colors duration-200">
           {/* Logo */}
           <div className="p-6 border-b border-gray-600 dark:border-gray-700">
             <div className="flex items-center gap-3">
@@ -135,7 +135,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   }
 
   return (
-    <div className="w-80 bg-gray-700 dark:bg-gray-800 rounded-xl h-full flex flex-col transition-colors duration-200 shadow-lg">
+    <div className="w-80 bg-gray-700 dark:bg-gray-800 h-full flex flex-col transition-colors duration-200">
       {/* Logo */}
       <div className="p-6 border-b border-gray-600 dark:border-gray-700">
         <div className="flex items-center gap-3">
