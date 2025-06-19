@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { 
-  PenTool, 
-  BarChart3, 
-  Settings, 
+import React, { useState } from "react";
+import {
+  PenTool,
+  BarChart3,
+  Settings,
   Sparkles,
   FileText,
   Volume2,
@@ -13,11 +13,11 @@ import {
   LogOut,
   Settings as SettingsIcon,
   Sun,
-  Moon
-} from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import { useTheme } from '../contexts/ThemeContext';
-import { AuthModal } from './auth/AuthModal';
+  Moon,
+} from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { useTheme } from "../contexts/ThemeContext";
+import { AuthModal } from "./auth/AuthModal";
 
 interface SidebarProps {
   activeSection: string;
@@ -31,12 +31,12 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const menuItems = [
-    { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-    { id: 'tools', name: 'Writing Tools', icon: PenTool },
-    { id: 'audio', name: 'Text-to-Speech', icon: Volume2 },
-    { id: 'projects', name: 'Projects', icon: FileText },
-    { id: 'templates', name: 'Templates', icon: Sparkles },
-    { id: 'settings', name: 'Settings', icon: Settings }
+    { id: "dashboard", name: "Dashboard", icon: BarChart3 },
+    { id: "tools", name: "Writing Tools", icon: PenTool },
+    { id: "audio", name: "Text-to-Speech", icon: Volume2 },
+    { id: "projects", name: "Projects", icon: FileText },
+    { id: "templates", name: "Templates", icon: Sparkles },
+    { id: "settings", name: "Settings", icon: Settings },
   ];
 
   const handleSignOut = async () => {
@@ -47,7 +47,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   if (!user) {
     return (
       <>
-        <div className="w-80 bg-gray-700 dark:bg-gray-800 h-full flex flex-col transition-colors duration-200">
+        <div className="w-64 h-full flex flex-col transition-colors duration-200">
           {/* Logo */}
           <div className="p-6 border-b border-gray-600 dark:border-gray-700">
             <div className="flex items-center gap-3">
@@ -101,8 +101,14 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               onClick={toggleTheme}
               className="w-full flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:text-white hover:bg-gray-600 dark:hover:bg-gray-700 rounded-xl transition-all duration-200"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              <span className="font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+              <span className="font-medium">
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </span>
             </button>
 
             {/* Auth Button */}
@@ -135,7 +141,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
   }
 
   return (
-    <div className="w-80 bg-gray-700 dark:bg-gray-800 h-full flex flex-col transition-colors duration-200">
+    <div className="w-64 h-full flex flex-col transition-colors duration-200">
       {/* Logo */}
       <div className="p-6 border-b border-gray-600 dark:border-gray-700">
         <div className="flex items-center gap-3">
@@ -172,8 +178,8 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   onClick={() => onSectionChange(item.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all duration-200 ${
                     activeSection === item.id
-                      ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 hover:text-white'
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 hover:text-white"
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -192,8 +198,14 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           onClick={toggleTheme}
           className="w-full flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:text-white hover:bg-gray-600 dark:hover:bg-gray-700 rounded-xl transition-all duration-200"
         >
-          {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          <span className="font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          {theme === "dark" ? (
+            <Sun className="w-5 h-5" />
+          ) : (
+            <Moon className="w-5 h-5" />
+          )}
+          <span className="font-medium">
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
+          </span>
         </button>
 
         {/* Notifications */}
@@ -217,7 +229,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                 {profile?.full_name || user.email}
               </p>
               <p className="text-xs text-gray-400 capitalize">
-                {profile?.plan_type || 'Free'} Plan
+                {profile?.plan_type || "Free"} Plan
               </p>
             </div>
           </button>
@@ -231,14 +243,14 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               <div className="absolute bottom-full left-0 right-0 mb-2 bg-gray-600 dark:bg-gray-700 rounded-xl shadow-lg border border-gray-500 dark:border-gray-600 py-2 z-50">
                 <div className="px-4 py-2 border-b border-gray-500 dark:border-gray-600">
                   <p className="text-sm font-medium text-white">
-                    {profile?.full_name || 'User'}
+                    {profile?.full_name || "User"}
                   </p>
                   <p className="text-xs text-gray-400">{user.email}</p>
                 </div>
-                
-                <button 
+
+                <button
                   onClick={() => {
-                    onSectionChange('settings');
+                    onSectionChange("settings");
                     setShowUserMenu(false);
                   }}
                   className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-500 dark:hover:bg-gray-600 hover:text-white transition-colors"
@@ -246,7 +258,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   <SettingsIcon className="w-4 h-4" />
                   Settings
                 </button>
-                
+
                 <button
                   onClick={handleSignOut}
                   className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-red-900/20 transition-colors"
@@ -260,7 +272,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
         </div>
 
         {/* Upgrade Card */}
-        {profile?.plan_type === 'free' && (
+        {profile?.plan_type === "free" && (
           <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-4 text-white">
             <h3 className="font-semibold text-sm mb-1">Upgrade to Pro</h3>
             <p className="text-xs text-blue-100 mb-3">

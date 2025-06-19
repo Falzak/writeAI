@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { AuthProvider } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { ProtectedRoute } from './components/auth/ProtectedRoute';
-import { Sidebar } from './components/Sidebar';
-import { Dashboard } from './components/Dashboard';
-import { WritingTools } from './components/WritingTools';
-import { WritingEditor } from './components/WritingEditor';
-import { TextToSpeech } from './components/TextToSpeech';
-import { Projects } from './components/Projects';
-import { Templates } from './components/Templates';
-import { Settings } from './components/Settings';
-import { WritingTool } from './types';
+import React, { useState } from "react";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
+import { Sidebar } from "./components/Sidebar";
+import { Dashboard } from "./components/Dashboard";
+import { WritingTools } from "./components/WritingTools";
+import { WritingEditor } from "./components/WritingEditor";
+import { TextToSpeech } from "./components/TextToSpeech";
+import { Projects } from "./components/Projects";
+import { Templates } from "./components/Templates";
+import { Settings } from "./components/Settings";
+import { WritingTool } from "./types";
 
 function AppContent() {
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState("dashboard");
   const [selectedTool, setSelectedTool] = useState<WritingTool | null>(null);
 
   const handleToolSelect = (tool: WritingTool) => {
@@ -22,7 +22,7 @@ function AppContent() {
 
   const handleBackToTools = () => {
     setSelectedTool(null);
-    setActiveSection('tools');
+    setActiveSection("tools");
   };
 
   const renderContent = () => {
@@ -31,17 +31,17 @@ function AppContent() {
     }
 
     switch (activeSection) {
-      case 'dashboard':
+      case "dashboard":
         return <Dashboard />;
-      case 'tools':
+      case "tools":
         return <WritingTools onToolSelect={handleToolSelect} />;
-      case 'audio':
+      case "audio":
         return <TextToSpeech />;
-      case 'projects':
+      case "projects":
         return <Projects />;
-      case 'templates':
+      case "templates":
         return <Templates />;
-      case 'settings':
+      case "settings":
         return <Settings />;
       default:
         return <Dashboard />;
@@ -50,10 +50,13 @@ function AppContent() {
 
   return (
     <div className="h-screen bg-gray-800 dark:bg-gray-900 flex transition-colors duration-200">
-      <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-      
-      <div className="flex-1 p-4 overflow-hidden">
-        <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto">
+      <Sidebar
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+      />
+
+      <div className="flex-1 p-2 overflow-hidden">
+        <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto border border-gray-300 dark:border-gray-700">
           {renderContent()}
         </main>
       </div>
