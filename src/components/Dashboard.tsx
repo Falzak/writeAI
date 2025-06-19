@@ -138,23 +138,23 @@ export function Dashboard() {
     const now = new Date();
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
     
-    if (diffInHours < 1) return 'Agora mesmo';
-    if (diffInHours < 24) return `${diffInHours}h atrás`;
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
     
     const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}d atrás`;
+    if (diffInDays < 7) return `${diffInDays}d ago`;
     
-    return date.toLocaleDateString('pt-BR');
+    return date.toLocaleDateString('en-US');
   };
 
   const getToolDisplayName = (toolType: string) => {
     const toolNames: Record<string, string> = {
-      'rewrite': 'Reescrita',
-      'article': 'Artigos',
-      'email': 'E-mails',
-      'social': 'Redes Sociais',
-      'product': 'Produtos',
-      'correction': 'Correção',
+      'rewrite': 'Rewrite',
+      'article': 'Articles',
+      'email': 'Emails',
+      'social': 'Social Media',
+      'product': 'Products',
+      'correction': 'Correction',
       'tts': 'Text-to-Speech',
       'audiobook': 'Audiobooks'
     };
@@ -176,7 +176,7 @@ export function Dashboard() {
   };
 
   const getStatusText = (status: string) => {
-    return status === 'completed' ? 'Concluído' : 'Rascunho';
+    return status === 'completed' ? 'Completed' : 'Draft';
   };
 
   const formatNumber = (num: number) => {
@@ -192,33 +192,33 @@ export function Dashboard() {
 
   const statsData = [
     {
-      title: 'Projetos Criados',
+      title: 'Projects Created',
       value: stats.totalProjects.toString(),
-      change: stats.weeklyProjects > 0 ? `+${stats.weeklyProjects} esta semana` : 'Nenhum esta semana',
+      change: stats.weeklyProjects > 0 ? `+${stats.weeklyProjects} this week` : 'None this week',
       positive: stats.weeklyProjects > 0,
       icon: FileText,
       gradient: 'from-blue-500 to-blue-600'
     },
     {
-      title: 'Palavras Geradas',
+      title: 'Words Generated',
       value: formatNumber(stats.totalWords),
-      change: stats.monthlyWords > 0 ? `+${formatNumber(stats.monthlyWords)} este mês` : 'Nenhuma este mês',
+      change: stats.monthlyWords > 0 ? `+${formatNumber(stats.monthlyWords)} this month` : 'None this month',
       positive: stats.monthlyWords > 0,
       icon: TrendingUp,
       gradient: 'from-green-500 to-green-600'
     },
     {
-      title: 'Áudios Criados',
+      title: 'Audio Created',
       value: stats.audioGenerations.toString(),
-      change: stats.audioGenerations > 0 ? 'Disponível' : 'Nenhum ainda',
+      change: stats.audioGenerations > 0 ? 'Available' : 'None yet',
       positive: stats.audioGenerations > 0,
       icon: Volume2,
       gradient: 'from-purple-500 to-purple-600'
     },
     {
-      title: 'Taxa de Conclusão',
+      title: 'Completion Rate',
       value: stats.totalProjects > 0 ? `${Math.round((stats.completedProjects / stats.totalProjects) * 100)}%` : '0%',
-      change: `${stats.completedProjects} de ${stats.totalProjects}`,
+      change: `${stats.completedProjects} of ${stats.totalProjects}`,
       positive: stats.completedProjects > 0,
       icon: Target,
       gradient: 'from-orange-500 to-orange-600'
@@ -245,12 +245,12 @@ export function Dashboard() {
     <div className="p-6 space-y-6 bg-gray-50 dark:bg-gray-900 min-h-full transition-colors duration-200">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          Olá, {profile?.full_name || 'Usuário'}! 👋
+          Hello, {profile?.full_name || 'User'}! 👋
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
           {stats.totalProjects > 0 
-            ? `Você já criou ${stats.totalProjects} projetos e gerou ${formatNumber(stats.totalWords)} palavras!`
-            : 'Comece criando seu primeiro projeto com nossas ferramentas de IA.'
+            ? `You've created ${stats.totalProjects} projects and generated ${formatNumber(stats.totalWords)} words!`
+            : 'Start by creating your first project with our AI tools.'
           }
         </p>
       </div>
@@ -281,7 +281,7 @@ export function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Atividade Recente</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
           <div className="space-y-4">
             {recentActivity.length > 0 ? (
               recentActivity.map((activity, index) => (
@@ -309,8 +309,8 @@ export function Dashboard() {
             ) : (
               <div className="text-center py-8">
                 <Calendar className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-                <p className="text-gray-500 dark:text-gray-400 font-medium">Nenhuma atividade recente</p>
-                <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Comece criando seu primeiro projeto!</p>
+                <p className="text-gray-500 dark:text-gray-400 font-medium">No recent activity</p>
+                <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Start by creating your first project!</p>
               </div>
             )}
           </div>
@@ -318,7 +318,7 @@ export function Dashboard() {
 
         {/* Tool Usage */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ferramentas Mais Usadas</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Most Used Tools</h2>
           <div className="space-y-4">
             {toolUsage.length > 0 ? (
               toolUsage.map((tool, index) => (
@@ -326,7 +326,7 @@ export function Dashboard() {
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-gray-900 dark:text-white">{tool.name}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">{tool.count} projetos</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{tool.count} projects</span>
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{tool.percentage}%</span>
                     </div>
                   </div>
@@ -341,8 +341,8 @@ export function Dashboard() {
             ) : (
               <div className="text-center py-8">
                 <TrendingUp className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-                <p className="text-gray-500 dark:text-gray-400 font-medium">Nenhum dado de uso ainda</p>
-                <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Use as ferramentas para ver estatísticas!</p>
+                <p className="text-gray-500 dark:text-gray-400 font-medium">No usage data yet</p>
+                <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Use the tools to see statistics!</p>
               </div>
             )}
           </div>
@@ -355,26 +355,26 @@ export function Dashboard() {
         <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-lg font-semibold mb-1">Score de Produtividade</h3>
-              <p className="text-blue-100 text-sm">Baseado na sua atividade</p>
+              <h3 className="text-lg font-semibold mb-1">Productivity Score</h3>
+              <p className="text-blue-100 text-sm">Based on your activity</p>
             </div>
             <div className="text-right">
               <div className="text-3xl font-bold">{stats.productivityScore}</div>
-              <div className="text-blue-100 text-sm">de 100</div>
+              <div className="text-blue-100 text-sm">out of 100</div>
             </div>
           </div>
           
           <div className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-blue-100">Projetos concluídos</span>
+              <span className="text-blue-100">Completed projects</span>
               <span>{stats.completedProjects}/{stats.totalProjects}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-blue-100">Palavras por projeto</span>
+              <span className="text-blue-100">Words per project</span>
               <span>{stats.averageWordsPerProject}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-blue-100">Projetos esta semana</span>
+              <span className="text-blue-100">Projects this week</span>
               <span>{stats.weeklyProjects}</span>
             </div>
           </div>
@@ -387,10 +387,10 @@ export function Dashboard() {
               <Award className="w-8 h-8 text-yellow-500" />
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white">
-                  Plano {profile?.plan_type === 'free' ? 'Gratuito' : 'Premium'}
+                  {profile?.plan_type === 'free' ? 'Free Plan' : 'Premium Plan'}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {profile?.plan_type === 'free' ? 'Limite mensal' : 'Acesso ilimitado'}
+                  {profile?.plan_type === 'free' ? 'Monthly limit' : 'Unlimited access'}
                 </p>
               </div>
             </div>
@@ -404,7 +404,7 @@ export function Dashboard() {
           {profile?.plan_type === 'free' && (
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Palavras usadas</span>
+                <span className="text-gray-600 dark:text-gray-400">Words used</span>
                 <span className="font-medium text-gray-900 dark:text-white">
                   {(profile?.api_usage_count || 0).toLocaleString()} / {(profile?.monthly_usage_limit || 10000).toLocaleString()}
                 </span>
@@ -416,7 +416,7 @@ export function Dashboard() {
                 ></div>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {getUsagePercentage()}% do limite mensal utilizado
+                {getUsagePercentage()}% of monthly limit used
               </p>
             </div>
           )}
@@ -427,13 +427,13 @@ export function Dashboard() {
       {stats.totalProjects === 0 && (
         <div className="bg-gradient-to-r from-green-400 to-blue-500 rounded-xl p-6 text-white text-center shadow-lg">
           <Zap className="w-12 h-12 mx-auto mb-4" />
-          <h3 className="text-xl font-bold mb-2">Bem-vindo ao WriteAI Pro! 🚀</h3>
+          <h3 className="text-xl font-bold mb-2">Welcome to WriteAI Pro! 🚀</h3>
           <p className="text-green-100 mb-4">
-            Você está pronto para revolucionar sua produtividade de escrita com IA.
+            You're ready to revolutionize your writing productivity with AI.
           </p>
           <button className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-medium hover:bg-white/30 transition-all duration-200 flex items-center gap-2 mx-auto">
             <Plus className="w-4 h-4" />
-            Criar Primeiro Projeto
+            Create First Project
           </button>
         </div>
       )}

@@ -2,16 +2,16 @@ import { Voice } from '../types';
 
 export const voices: Voice[] = [
   {
-    id: 'pt-br-ana',
+    id: 'en-us-ana',
     name: 'Ana',
-    language: 'Português (Brasil)',
+    language: 'English (US)',
     gender: 'female',
     category: 'standard'
   },
   {
-    id: 'pt-br-carlos',
+    id: 'en-us-carlos',
     name: 'Carlos',
-    language: 'Português (Brasil)',
+    language: 'English (US)',
     gender: 'male',
     category: 'standard'
   },

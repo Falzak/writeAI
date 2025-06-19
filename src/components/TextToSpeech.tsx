@@ -48,25 +48,25 @@ export function TextToSpeech() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Text-to-Speech</h1>
-        <p className="text-gray-600">Converta qualquer texto em áudio profissional com IA</p>
+        <p className="text-gray-600">Convert any text to professional audio with AI</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Text Input */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Texto para Conversão</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Text for Conversion</h2>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               rows={12}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              placeholder="Digite ou cole o texto que deseja converter em áudio..."
+              placeholder="Type or paste the text you want to convert to audio..."
             />
             
             <div className="flex items-center justify-between mt-4">
               <div className="text-sm text-gray-500">
-                {text.length} caracteres • {text.split(' ').filter(word => word.length > 0).length} palavras
+                {text.length} characters • {text.split(' ').filter(word => word.length > 0).length} words
               </div>
               
               <div className="flex gap-3">
@@ -75,7 +75,7 @@ export function TextToSpeech() {
                   className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
                 >
                   <Settings className="w-4 h-4" />
-                  Configurações
+                  Settings
                 </button>
                 
                 <button
@@ -86,12 +86,12 @@ export function TextToSpeech() {
                   {isGenerating ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Gerando...
+                      Generating...
                     </>
                   ) : (
                     <>
                       <Volume2 className="w-4 h-4" />
-                      Gerar Áudio
+                      Generate Audio
                     </>
                   )}
                 </button>
@@ -101,7 +101,7 @@ export function TextToSpeech() {
 
           {/* Audio Player */}
           <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Reprodução de Áudio</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Audio Playback</h2>
             
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6">
               <div className="flex items-center justify-between mb-4">
@@ -149,7 +149,7 @@ export function TextToSpeech() {
         <div className="space-y-6">
           {/* Voice Selection */}
           <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Seleção de Voz</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Voice Selection</h2>
             
             <div className="space-y-3 max-h-64 overflow-y-auto">
               {Object.entries(languageGroups).map(([language, voiceList]) => (
@@ -191,12 +191,12 @@ export function TextToSpeech() {
           {/* Voice Settings */}
           {showSettings && (
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Configurações de Voz</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Voice Settings</h2>
               
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Estabilidade: {voiceSettings.stability.toFixed(2)}
+                    Stability: {voiceSettings.stability.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -207,12 +207,12 @@ export function TextToSpeech() {
                     onChange={(e) => setVoiceSettings(prev => ({ ...prev, stability: parseFloat(e.target.value) }))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Controla a variabilidade da voz</p>
+                  <p className="text-xs text-gray-500 mt-1">Controls voice variability</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Clareza: {voiceSettings.similarityBoost.toFixed(2)}
+                    Clarity: {voiceSettings.similarityBoost.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -223,12 +223,12 @@ export function TextToSpeech() {
                     onChange={(e) => setVoiceSettings(prev => ({ ...prev, similarityBoost: parseFloat(e.target.value) }))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Fidelidade à voz original</p>
+                  <p className="text-xs text-gray-500 mt-1">Fidelity to original voice</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Estilo: {voiceSettings.style.toFixed(2)}
+                    Style: {voiceSettings.style.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -239,7 +239,7 @@ export function TextToSpeech() {
                     onChange={(e) => setVoiceSettings(prev => ({ ...prev, style: parseFloat(e.target.value) }))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Intensidade do estilo</p>
+                  <p className="text-xs text-gray-500 mt-1">Style intensity</p>
                 </div>
               </div>
             </div>
@@ -247,7 +247,7 @@ export function TextToSpeech() {
 
           {/* Features */}
           <div className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl p-6 text-white">
-            <h3 className="font-semibold mb-3">Recursos Premium</h3>
+            <h3 className="font-semibold mb-3">Premium Features</h3>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <Mic className="w-4 h-4" />
@@ -255,15 +255,15 @@ export function TextToSpeech() {
               </div>
               <div className="flex items-center gap-2">
                 <Volume2 className="w-4 h-4" />
-                Streaming em Tempo Real
+                Real-time Streaming
               </div>
               <div className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
-                Controles Avançados
+                Advanced Controls
               </div>
             </div>
             <button className="w-full mt-4 bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors">
-              Upgrade para Premium
+              Upgrade to Premium
             </button>
           </div>
         </div>

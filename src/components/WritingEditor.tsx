@@ -17,7 +17,7 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
   const [currentProject, setCurrentProject] = useState<any>(null);
 
   useEffect(() => {
-    const project = createProject(`Novo ${tool.name}`, tool.id);
+    const project = createProject(`New ${tool.name}`, tool.id);
     setCurrentProject(project);
     setTitle(project.title);
   }, [tool]);
@@ -60,14 +60,14 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
 
   const getPromptPlaceholder = () => {
     const placeholders = {
-      'rewrite': 'Digite o texto que deseja reescrever...',
-      'article': 'Descreva o tópico do artigo que deseja criar...',
-      'email': 'Descreva o contexto e objetivo do e-mail...',
-      'social': 'Qual mensagem deseja transmitir nas redes sociais?',
-      'product': 'Descreva o produto e seus principais benefícios...',
-      'correction': 'Cole o texto que deseja corrigir...'
+      'rewrite': 'Enter the text you want to rewrite...',
+      'article': 'Describe the article topic you want to create...',
+      'email': 'Describe the context and objective of the email...',
+      'social': 'What message do you want to convey on social media?',
+      'product': 'Describe the product and its main benefits...',
+      'correction': 'Paste the text you want to correct...'
     };
-    return placeholders[tool.id as keyof typeof placeholders] || 'Descreva o que deseja criar...';
+    return placeholders[tool.id as keyof typeof placeholders] || 'Describe what you want to create...';
   };
 
   return (
@@ -94,7 +94,7 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
               className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <Save className="w-4 h-4" />
-              Salvar
+              Save
             </button>
             <button
               onClick={handleCopy}
@@ -102,7 +102,7 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
               className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <Copy className="w-4 h-4" />
-              Copiar
+              Copy
             </button>
           </div>
         </div>
@@ -114,20 +114,20 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Título do Projeto
+                Project Title
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Nome do seu projeto..."
+                placeholder="Your project name..."
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Descrição/Prompt
+                Description/Prompt
               </label>
               <textarea
                 value={prompt}
@@ -146,19 +146,19 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
               {isGenerating || loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Gerando...
+                  Generating...
                 </>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
-                  Gerar Conteúdo
+                  Generate Content
                 </>
               )}
             </button>
 
             {/* Features */}
             <div className="mt-6">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">Recursos Disponíveis</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">Available Features</h3>
               <div className="space-y-2">
                 {tool.features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3 text-sm text-gray-600">
@@ -175,7 +175,7 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
         <div className="w-1/2 p-6 bg-white">
           <div className="h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium text-gray-900">Conteúdo Gerado</h3>
+              <h3 className="text-lg font-medium text-gray-900">Generated Content</h3>
               {content && (
                 <div className="flex items-center gap-2">
                   <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
@@ -199,8 +199,8 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
                 <div className="flex items-center justify-center h-full text-gray-500">
                   <div className="text-center">
                     <Sparkles className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                    <p>O conteúdo gerado aparecerá aqui</p>
-                    <p className="text-sm mt-2">Digite um prompt e clique em "Gerar Conteúdo"</p>
+                    <p>Generated content will appear here</p>
+                    <p className="text-sm mt-2">Enter a prompt and click "Generate Content"</p>
                   </div>
                 </div>
               )}
@@ -211,7 +211,7 @@ export function WritingEditor({ tool, onBack }: WritingEditorProps) {
                 <div className="flex items-center gap-2 text-green-800">
                   <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                   <span className="text-sm font-medium">
-                    Conteúdo gerado com sucesso! ({content.split(' ').length} palavras)
+                    Content generated successfully! ({content.split(' ').length} words)
                   </span>
                 </div>
               </div>

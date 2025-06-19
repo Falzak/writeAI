@@ -29,8 +29,8 @@ export function Templates() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Templates Inteligentes</h1>
-        <p className="text-gray-600">Acelere sua escrita com templates profissionais pré-otimizados</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Smart Templates</h1>
+        <p className="text-gray-600">Accelerate your writing with pre-optimized professional templates</p>
       </div>
 
       {/* Filters */}
@@ -41,7 +41,7 @@ export function Templates() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Buscar templates..."
+                placeholder="Search templates..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -60,7 +60,7 @@ export function Templates() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                {category === 'all' ? 'Todos' : category}
+                {category === 'all' ? 'All' : category}
               </button>
             ))}
           </div>
@@ -99,7 +99,7 @@ export function Templates() {
               {template.variables.length > 0 && (
                 <div className="mb-4">
                   <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
-                    Variáveis ({template.variables.length})
+                    Variables ({template.variables.length})
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {template.variables.slice(0, 3).map((variable, index) => (
@@ -112,7 +112,7 @@ export function Templates() {
                     ))}
                     {template.variables.length > 3 && (
                       <span className="inline-block bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
-                        +{template.variables.length - 3} mais
+                        +{template.variables.length - 3} more
                       </span>
                     )}
                   </div>
@@ -124,7 +124,7 @@ export function Templates() {
                   onClick={() => handleUseTemplate(template)}
                   className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                 >
-                  Usar Template
+                  Use Template
                 </button>
                 <button
                   onClick={() => handleCopyTemplate(template)}
@@ -144,19 +144,19 @@ export function Templates() {
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Filter className="w-8 h-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum template encontrado</h3>
-          <p className="text-gray-600">Tente ajustar os filtros de busca ou explore outras categorias.</p>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No templates found</h3>
+          <p className="text-gray-600">Try adjusting your search filters or explore other categories.</p>
         </div>
       )}
 
       {/* Create Template CTA */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-6 text-white text-center">
-        <h3 className="text-xl font-bold mb-2">Crie Seus Próprios Templates</h3>
+        <h3 className="text-xl font-bold mb-2">Create Your Own Templates</h3>
         <p className="text-purple-100 mb-4">
-          Transforme seus melhores textos em templates reutilizáveis e aumente sua produtividade
+          Transform your best texts into reusable templates and boost your productivity
         </p>
         <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors">
-          Criar Template Personalizado
+          Create Custom Template
         </button>
       </div>
     </div>

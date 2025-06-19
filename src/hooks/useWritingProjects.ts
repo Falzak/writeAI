@@ -106,16 +106,16 @@ export function useWritingProjects() {
       // Simulate AI generation
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const mockContent = `Este é um conteúdo gerado pela IA para "${prompt}" usando a ferramenta ${toolType}. 
+      const mockContent = `This is AI-generated content for "${prompt}" using the ${toolType} tool. 
 
-O conteúdo seria personalizado baseado na ferramenta específica e no prompt fornecido. Por exemplo:
+The content would be customized based on the specific tool and prompt provided. For example:
 
-- Para artigos: estrutura completa com introdução, desenvolvimento e conclusão
-- Para e-mails: tom profissional com call-to-action
-- Para redes sociais: linguagem envolvente com hashtags
-- Para produtos: descrições persuasivas com benefícios
+- For articles: complete structure with introduction, development and conclusion
+- For emails: professional tone with call-to-action
+- For social media: engaging language with hashtags
+- For products: persuasive descriptions with benefits
 
-Esta é uma demonstração do funcionamento da plataforma WriteAI Pro.`;
+This is a demonstration of the WriteAI Pro platform functionality.`;
 
       // Log usage analytics
       await db.logUsage(user.id, 'content_generated', {

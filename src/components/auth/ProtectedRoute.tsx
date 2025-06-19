@@ -16,7 +16,7 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Carregando...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -36,13 +36,13 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">WriteAI Pro</h1>
             <p className="text-gray-600 mb-6">
-              Faça login para acessar suas ferramentas de escrita com IA
+              Sign in to access your AI writing tools
             </p>
             <button
               onClick={() => setShowAuthModal(true)}
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
             >
-              Entrar / Criar Conta
+              Sign In / Sign Up
             </button>
           </div>
         </div>

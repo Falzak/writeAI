@@ -11,10 +11,10 @@ export function WritingTools({ onToolSelect }: WritingToolsProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const categories = [
-    { id: 'all', name: 'Todas', description: 'Todas as ferramentas disponíveis' },
-    { id: 'writing', name: 'Escrita', description: 'Ferramentas de criação e edição de texto' },
-    { id: 'audio', name: 'Áudio', description: 'Conversão de texto para voz' },
-    { id: 'analysis', name: 'Análise', description: 'Ferramentas de otimização e correção' }
+    { id: 'all', name: 'All', description: 'All available tools' },
+    { id: 'writing', name: 'Writing', description: 'Text creation and editing tools' },
+    { id: 'audio', name: 'Audio', description: 'Text-to-speech conversion' },
+    { id: 'analysis', name: 'Analysis', description: 'Optimization and correction tools' }
   ];
 
   const filteredTools = selectedCategory && selectedCategory !== 'all' 
@@ -29,8 +29,8 @@ export function WritingTools({ onToolSelect }: WritingToolsProps) {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Ferramentas de Escrita</h1>
-        <p className="text-gray-600">Escolha a ferramenta ideal para criar seu conteúdo</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Writing Tools</h1>
+        <p className="text-gray-600">Choose the perfect tool to create your content</p>
       </div>
 
       {/* Category Filter */}
@@ -69,7 +69,7 @@ export function WritingTools({ onToolSelect }: WritingToolsProps) {
                   <p className="text-sm text-gray-600 mb-4">{tool.description}</p>
                   
                   <div className="space-y-2">
-                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Recursos</p>
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Features</p>
                     <div className="flex flex-wrap gap-1">
                       {tool.features.slice(0, 3).map((feature, index) => (
                         <span
@@ -81,7 +81,7 @@ export function WritingTools({ onToolSelect }: WritingToolsProps) {
                       ))}
                       {tool.features.length > 3 && (
                         <span className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs">
-                          +{tool.features.length - 3} mais
+                          +{tool.features.length - 3} more
                         </span>
                       )}
                     </div>
@@ -98,8 +98,8 @@ export function WritingTools({ onToolSelect }: WritingToolsProps) {
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <LucideIcons.Search className="w-8 h-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhuma ferramenta encontrada</h3>
-          <p className="text-gray-600">Tente ajustar os filtros ou explore outras categorias.</p>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No tools found</h3>
+          <p className="text-gray-600">Try adjusting the filters or explore other categories.</p>
         </div>
       )}
     </div>

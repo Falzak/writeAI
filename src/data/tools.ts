@@ -3,66 +3,66 @@ import { WritingTool } from '../types';
 export const writingTools: WritingTool[] = [
   {
     id: 'rewrite',
-    name: 'Reescrita Inteligente',
-    description: 'Melhore textos existentes com diferentes tons e estilos',
+    name: 'Smart Rewriting',
+    description: 'Improve existing texts with different tones and styles',
     icon: 'RefreshCw',
     category: 'writing',
-    features: ['Tom profissional', 'Estilo casual', 'Simplificação', 'Expansão']
+    features: ['Professional tone', 'Casual style', 'Simplification', 'Expansion']
   },
   {
     id: 'article',
-    name: 'Geração de Artigos',
-    description: 'Crie artigos completos otimizados para SEO',
+    name: 'Article Generation',
+    description: 'Create complete SEO-optimized articles',
     icon: 'FileText',
     category: 'writing',
-    features: ['SEO otimizado', 'Estrutura profissional', 'Pesquisa incluída', 'CTA integrado']
+    features: ['SEO optimized', 'Professional structure', 'Research included', 'CTA integrated']
   },
   {
     id: 'email',
-    name: 'E-mails Profissionais',
-    description: 'Templates e respostas automáticas para e-mails',
+    name: 'Professional Emails',
+    description: 'Templates and automatic responses for emails',
     icon: 'Mail',
     category: 'writing',
-    features: ['Templates prontos', 'Tom personalizado', 'Respostas rápidas', 'Seguimento']
+    features: ['Ready templates', 'Custom tone', 'Quick responses', 'Follow-up']
   },
   {
     id: 'social',
-    name: 'Posts para Redes Sociais',
-    description: 'Conteúdo otimizado para múltiplas plataformas',
+    name: 'Social Media Posts',
+    description: 'Content optimized for multiple platforms',
     icon: 'Share2',
     category: 'writing',
-    features: ['Multi-plataforma', 'Hashtags incluídas', 'Call-to-action', 'Agendamento']
+    features: ['Multi-platform', 'Hashtags included', 'Call-to-action', 'Scheduling']
   },
   {
     id: 'product',
-    name: 'Descrições de Produtos',
-    description: 'Textos persuasivos que convertem visitantes em clientes',
+    name: 'Product Descriptions',
+    description: 'Persuasive texts that convert visitors into customers',
     icon: 'Package',
     category: 'writing',
-    features: ['Copywriting persuasivo', 'SEO friendly', 'Benefícios destacados', 'Urgência']
+    features: ['Persuasive copywriting', 'SEO friendly', 'Benefits highlighted', 'Urgency']
   },
   {
     id: 'correction',
-    name: 'Correção e Estilo',
-    description: 'Verificação gramatical avançada com sugestões',
+    name: 'Correction & Style',
+    description: 'Advanced grammar checking with suggestions',
     icon: 'CheckCircle',
     category: 'writing',
-    features: ['Gramática', 'Ortografia', 'Estilo', 'Tom']
+    features: ['Grammar', 'Spelling', 'Style', 'Tone']
   },
   {
     id: 'tts',
     name: 'Text-to-Speech',
-    description: 'Converta qualquer texto em áudio profissional',
+    description: 'Convert any text to professional audio',
     icon: 'Volume2',
     category: 'audio',
-    features: ['32 idiomas', '3000+ vozes', 'Voice cloning', 'Tempo real']
+    features: ['32 languages', '3000+ voices', 'Voice cloning', 'Real-time']
   },
   {
     id: 'audiobook',
-    name: 'Audiobooks Automáticos',
-    description: 'Transforme artigos longos em audiobooks',
+    name: 'Automatic Audiobooks',
+    description: 'Transform long articles into audiobooks',
     icon: 'Headphones',
     category: 'audio',
-    features: ['Capítulos automáticos', 'Marcadores', 'Múltiplas vozes', 'Download']
+    features: ['Auto chapters', 'Bookmarks', 'Multiple voices', 'Download']
   }
 ];

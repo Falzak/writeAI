@@ -32,11 +32,11 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
 
   const menuItems = [
     { id: 'dashboard', name: 'Dashboard', icon: BarChart3 },
-    { id: 'tools', name: 'Ferramentas', icon: PenTool },
+    { id: 'tools', name: 'Writing Tools', icon: PenTool },
     { id: 'audio', name: 'Text-to-Speech', icon: Volume2 },
-    { id: 'projects', name: 'Projetos', icon: FileText },
+    { id: 'projects', name: 'Projects', icon: FileText },
     { id: 'templates', name: 'Templates', icon: Sparkles },
-    { id: 'settings', name: 'Configurações', icon: Settings }
+    { id: 'settings', name: 'Settings', icon: Settings }
   ];
 
   const handleSignOut = async () => {
@@ -67,7 +67,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Buscar..."
+                placeholder="Search..."
                 className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 disabled
               />
@@ -102,7 +102,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               className="w-full flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200"
             >
               {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              <span className="font-medium">{theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}</span>
+              <span className="font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
             </button>
 
             {/* Auth Button */}
@@ -110,17 +110,17 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               onClick={() => setShowAuthModal(true)}
               className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-3 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-sm"
             >
-              Entrar / Criar Conta
+              Sign In / Sign Up
             </button>
 
             {/* Upgrade Card */}
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-4 text-white">
-              <h3 className="font-semibold text-sm mb-1">Upgrade para Pro</h3>
+              <h3 className="font-semibold text-sm mb-1">Upgrade to Pro</h3>
               <p className="text-xs text-blue-100 mb-3">
-                Acesso ilimitado a todas as ferramentas
+                Unlimited access to all tools
               </p>
               <button className="w-full bg-white/20 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-white/30 transition-all duration-200">
-                Assinar Agora
+                Subscribe Now
               </button>
             </div>
           </div>
@@ -155,7 +155,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
           <input
             type="text"
-            placeholder="Buscar projetos, templates..."
+            placeholder="Search projects, templates..."
             className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
           />
         </div>
@@ -193,13 +193,13 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
           className="w-full flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200"
         >
           {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          <span className="font-medium">{theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}</span>
+          <span className="font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
 
         {/* Notifications */}
         <button className="w-full flex items-center gap-3 px-3 py-2.5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 relative">
           <Bell className="w-5 h-5" />
-          <span className="font-medium">Notificações</span>
+          <span className="font-medium">Notifications</span>
           <span className="absolute top-2 left-6 w-2 h-2 bg-red-500 rounded-full"></span>
         </button>
 
@@ -231,7 +231,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
               <div className="absolute bottom-full left-0 right-0 mb-2 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
                 <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    {profile?.full_name || 'Usuário'}
+                    {profile?.full_name || 'User'}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
                 </div>
@@ -244,7 +244,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                   <SettingsIcon className="w-4 h-4" />
-                  Configurações
+                  Settings
                 </button>
                 
                 <button
@@ -252,7 +252,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
-                  Sair
+                  Sign Out
                 </button>
               </div>
             </>
@@ -262,12 +262,12 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
         {/* Upgrade Card */}
         {profile?.plan_type === 'free' && (
           <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-4 text-white">
-            <h3 className="font-semibold text-sm mb-1">Upgrade para Pro</h3>
+            <h3 className="font-semibold text-sm mb-1">Upgrade to Pro</h3>
             <p className="text-xs text-blue-100 mb-3">
-              Acesso ilimitado a todas as ferramentas
+              Unlimited access to all tools
             </p>
             <button className="w-full bg-white/20 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-white/30 transition-all duration-200">
-              Assinar Agora
+              Subscribe Now
             </button>
           </div>
         )}

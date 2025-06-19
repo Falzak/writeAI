@@ -30,7 +30,7 @@ export function Projects() {
     });
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('pt-BR', {
+    return new Intl.DateTimeFormat('en-US', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
@@ -46,19 +46,19 @@ export function Projects() {
   };
 
   const getStatusText = (status: string) => {
-    return status === 'completed' ? 'Concluído' : 'Rascunho';
+    return status === 'completed' ? 'Completed' : 'Draft';
   };
 
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Meus Projetos</h1>
-          <p className="text-gray-600">Gerencie todos os seus projetos de escrita</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">My Projects</h1>
+          <p className="text-gray-600">Manage all your writing projects</p>
         </div>
         
         <div className="text-sm text-gray-500">
-          {projects.length} {projects.length === 1 ? 'projeto' : 'projetos'}
+          {projects.length} {projects.length === 1 ? 'project' : 'projects'}
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export function Projects() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Buscar projetos..."
+                placeholder="Search projects..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -84,9 +84,9 @@ export function Projects() {
               onChange={(e) => setFilterStatus(e.target.value as any)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="all">Todos os Status</option>
-              <option value="draft">Rascunhos</option>
-              <option value="completed">Concluídos</option>
+              <option value="all">All Status</option>
+              <option value="draft">Drafts</option>
+              <option value="completed">Completed</option>
             </select>
             
             <select
@@ -94,9 +94,9 @@ export function Projects() {
               onChange={(e) => setSortBy(e.target.value as any)}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="date">Data de Modificação</option>
-              <option value="title">Título</option>
-              <option value="words">Número de Palavras</option>
+              <option value="date">Last Modified</option>
+              <option value="title">Title</option>
+              <option value="words">Word Count</option>
             </select>
           </div>
         </div>
@@ -134,7 +134,7 @@ export function Projects() {
 
               <div className="mb-4">
                 <p className="text-sm text-gray-600 line-clamp-3">
-                  {project.content || 'Nenhum conteúdo ainda...'}
+                  {project.content || 'No content yet...'}
                 </p>
               </div>
 
@@ -144,7 +144,7 @@ export function Projects() {
                     <Calendar className="w-3 h-3" />
                     {formatDate(project.updatedAt)}
                   </div>
-                  <span>{project.wordCount} palavras</span>
+                  <span>{project.wordCount} words</span>
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -165,17 +165,17 @@ export function Projects() {
             <Search className="w-8 h-8 text-gray-400" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">
-            {searchTerm || filterStatus !== 'all' ? 'Nenhum projeto encontrado' : 'Nenhum projeto ainda'}
+            {searchTerm || filterStatus !== 'all' ? 'No projects found' : 'No projects yet'}
           </h3>
           <p className="text-gray-600 mb-4">
             {searchTerm || filterStatus !== 'all' 
-              ? 'Tente ajustar os filtros de busca.'
-              : 'Comece criando seu primeiro projeto com nossas ferramentas de IA.'
+              ? 'Try adjusting your search filters.'
+              : 'Start by creating your first project with our AI tools.'
             }
           </p>
           {!searchTerm && filterStatus === 'all' && (
             <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-              Criar Primeiro Projeto
+              Create First Project
             </button>
           )}
         </div>
@@ -187,25 +187,25 @@ export function Projects() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center">
               <p className="text-2xl font-bold">{filteredProjects.length}</p>
-              <p className="text-blue-100 text-sm">Projetos Total</p>
+              <p className="text-blue-100 text-sm">Total Projects</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold">
                 {filteredProjects.filter(p => p.status === 'completed').length}
               </p>
-              <p className="text-blue-100 text-sm">Concluídos</p>
+              <p className="text-blue-100 text-sm">Completed</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold">
                 {filteredProjects.reduce((acc, p) => acc + p.wordCount, 0).toLocaleString()}
               </p>
-              <p className="text-blue-100 text-sm">Palavras Total</p>
+              <p className="text-blue-100 text-sm">Total Words</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold">
                 {filteredProjects.filter(p => p.hasAudio).length}
               </p>
-              <p className="text-blue-100 text-sm">Com Áudio</p>
+              <p className="text-blue-100 text-sm">With Audio</p>
             </div>
           </div>
         </div>

@@ -3,34 +3,34 @@ import { Template } from '../types';
 export const templates: Template[] = [
   {
     id: 'blog-intro',
-    name: 'Introdução de Blog Post',
-    description: 'Introdução envolvente para artigos de blog',
+    name: 'Blog Post Introduction',
+    description: 'Engaging introduction for blog articles',
     category: 'Blog',
-    content: 'Você já se perguntou como {topic}? Neste artigo, vamos explorar {main_points} e descobrir {benefit}. Continue lendo para descobrir {call_to_action}.',
+    content: 'Have you ever wondered how {topic}? In this article, we\'ll explore {main_points} and discover {benefit}. Keep reading to find out {call_to_action}.',
     variables: ['topic', 'main_points', 'benefit', 'call_to_action']
   },
   {
     id: 'email-follow-up',
-    name: 'E-mail de Follow-up',
-    description: 'E-mail de acompanhamento profissional',
-    category: 'E-mail',
-    content: 'Olá {name},\n\nEspero que esteja bem. Estou entrando em contato para acompanhar nossa conversa sobre {topic}.\n\n{main_message}\n\nFico no aguardo do seu retorno.\n\nAtenciosamente,\n{sender_name}',
+    name: 'Follow-up Email',
+    description: 'Professional follow-up email',
+    category: 'Email',
+    content: 'Hello {name},\n\nI hope you\'re doing well. I\'m reaching out to follow up on our conversation about {topic}.\n\n{main_message}\n\nI look forward to hearing from you.\n\nBest regards,\n{sender_name}',
     variables: ['name', 'topic', 'main_message', 'sender_name']
   },
   {
     id: 'social-engagement',
-    name: 'Post Engajamento Social',
-    description: 'Post para aumentar engajamento nas redes sociais',
+    name: 'Social Media Engagement Post',
+    description: 'Post to increase engagement on social media',
     category: 'Social Media',
     content: '🚀 {hook_question}\n\n{main_content}\n\n✨ {call_to_action}\n\n{hashtags}',
     variables: ['hook_question', 'main_content', 'call_to_action', 'hashtags']
   },
   {
     id: 'product-description',
-    name: 'Descrição de Produto E-commerce',
-    description: 'Descrição persuasiva para produtos online',
+    name: 'E-commerce Product Description',
+    description: 'Persuasive description for online products',
     category: 'E-commerce',
-    content: '✨ {product_name}\n\n🎯 {main_benefit}\n\n📋 Características:\n{features_list}\n\n💡 {unique_selling_point}\n\n🛒 {call_to_action}',
+    content: '✨ {product_name}\n\n🎯 {main_benefit}\n\n📋 Features:\n{features_list}\n\n💡 {unique_selling_point}\n\n🛒 {call_to_action}',
     variables: ['product_name', 'main_benefit', 'features_list', 'unique_selling_point', 'call_to_action']
   }
 ];
