@@ -3,7 +3,6 @@ import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Sidebar } from './components/Sidebar';
-import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { WritingTools } from './components/WritingTools';
 import { WritingEditor } from './components/WritingEditor';
@@ -53,13 +52,9 @@ function AppContent() {
     <div className="h-screen bg-gray-50 dark:bg-gray-900 flex transition-colors duration-200">
       <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header />
-        
-        <main className="flex-1 overflow-y-auto">
-          {renderContent()}
-        </main>
-      </div>
+      <main className="flex-1 overflow-y-auto">
+        {renderContent()}
+      </main>
     </div>
   );
 }
