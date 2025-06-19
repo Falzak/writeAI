@@ -49,12 +49,14 @@ function AppContent() {
   };
 
   return (
-    <div className="h-screen bg-gray-50 dark:bg-gray-900 flex transition-colors duration-200">
+    <div className="h-screen bg-gray-100 dark:bg-gray-900 flex transition-colors duration-200">
       <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
       
-      <main className="flex-1 overflow-y-auto">
-        {renderContent()}
-      </main>
+      <div className="flex-1 p-6 overflow-hidden">
+        <main className="h-full bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-y-auto">
+          {renderContent()}
+        </main>
+      </div>
     </div>
   );
 }

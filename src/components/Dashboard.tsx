@@ -242,7 +242,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="p-6 space-y-6 bg-gray-50 dark:bg-gray-900 min-h-full transition-colors duration-200">
+    <div className="p-6 space-y-6 transition-colors duration-200">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Hello, {profile?.full_name || 'User'}! 👋
@@ -260,7 +260,7 @@ export function Dashboard() {
         {statsData.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg dark:hover:shadow-gray-900/20 transition-all duration-200">
+            <div key={index} className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 hover:shadow-lg dark:hover:shadow-gray-900/20 transition-all duration-200">
               <div className="flex items-center justify-between mb-4">
                 <div className={`w-12 h-12 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center shadow-sm`}>
                   <Icon className="w-6 h-6 text-white" />
@@ -280,12 +280,12 @@ export function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
           <div className="space-y-4">
             {recentActivity.length > 0 ? (
               recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200">
+                <div key={index} className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600/50 transition-all duration-200">
                   <div className={`w-10 h-10 bg-gradient-to-br ${getToolColor(activity.tool_type)} rounded-xl flex items-center justify-center shadow-sm`}>
                     <span className="text-white text-xs font-medium">
                       {getToolDisplayName(activity.tool_type)[0]?.toUpperCase()}
@@ -317,7 +317,7 @@ export function Dashboard() {
         </div>
 
         {/* Tool Usage */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Most Used Tools</h2>
           <div className="space-y-4">
             {toolUsage.length > 0 ? (
@@ -330,7 +330,7 @@ export function Dashboard() {
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{tool.percentage}%</span>
                     </div>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                     <div 
                       className={`bg-gradient-to-r ${tool.color} h-2 rounded-full transition-all duration-500`}
                       style={{ width: `${tool.percentage}%` }}
@@ -381,7 +381,7 @@ export function Dashboard() {
         </div>
 
         {/* Plan Status */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-200">
+        <div className="bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 p-6 transition-colors duration-200">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Award className="w-8 h-8 text-yellow-500" />
@@ -409,7 +409,7 @@ export function Dashboard() {
                   {(profile?.api_usage_count || 0).toLocaleString()} / {(profile?.monthly_usage_limit || 10000).toLocaleString()}
                 </span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                 <div 
                   className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
                   style={{ width: `${Math.min(getUsagePercentage(), 100)}%` }}
