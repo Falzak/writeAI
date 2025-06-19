@@ -1,66 +1,75 @@
-import React, { useState } from 'react';
-import { Search, Copy, Edit, Star, Filter } from 'lucide-react';
-import { templates } from '../data/templates';
+import React, { useState } from "react";
+import { Search, Copy, Edit, Star, Filter } from "lucide-react";
+import { templates } from "../data/templates";
 
 export function Templates() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const categories = ['all', ...Array.from(new Set(templates.map(t => t.category)))];
+  const categories = [
+    "all",
+    ...Array.from(new Set(templates.map((t) => t.category))),
+  ];
 
-  const filteredTemplates = templates.filter(template => {
-    const matchesSearch = template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         template.category.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
+  const filteredTemplates = templates.filter((template) => {
+    const matchesSearch =
+      template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      template.category.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" || template.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const handleCopyTemplate = (template: typeof templates[0]) => {
+  const handleCopyTemplate = (template: (typeof templates)[0]) => {
     navigator.clipboard.writeText(template.content);
     // You could add a toast notification here
   };
 
-  const handleUseTemplate = (template: typeof templates[0]) => {
+  const handleUseTemplate = (template: (typeof templates)[0]) => {
     // This would integrate with the writing tools
-    console.log('Using template:', template.name);
+    console.log("Using template:", template.name);
   };
 
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Smart Templates</h1>
-        <p className="text-gray-600">Accelerate your writing with pre-optimized professional templates</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          Smart Templates
+        </h1>
+        <p className="text-gray-600 dark:text-gray-300">
+          Accelerate your writing with pre-optimized professional templates
+        </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
               <input
                 type="text"
                 placeholder="Search templates..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 dark:placeholder-gray-400"
               />
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
-            {categories.map(category => (
+            {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                 }`}
               >
-                {category === 'all' ? 'All' : category}
+                {category === "all" ? "All" : category}
               </button>
             ))}
           </div>
@@ -73,24 +82,28 @@ export function Templates() {
           {filteredTemplates.map((template) => (
             <div
               key={template.id}
-              className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-gray-900">{template.name}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
+                      {template.name}
+                    </h3>
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{template.description}</p>
-                  <span className="inline-block bg-blue-100 text-blue-700 px-2 py-1 rounded-md text-xs font-medium">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    {template.description}
+                  </p>
+                  <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-1 rounded-md text-xs font-medium">
                     {template.category}
                   </span>
                 </div>
               </div>
 
               <div className="mb-4">
-                <div className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-500">
-                  <p className="text-sm text-gray-700 line-clamp-3">
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 border-l-4 border-blue-500">
+                  <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3">
                     {template.content}
                   </p>
                 </div>
@@ -98,20 +111,20 @@ export function Templates() {
 
               {template.variables.length > 0 && (
                 <div className="mb-4">
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                  <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                     Variables ({template.variables.length})
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {template.variables.slice(0, 3).map((variable, index) => (
                       <span
                         key={index}
-                        className="inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded-md text-xs"
+                        className="inline-block bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-2 py-1 rounded-md text-xs"
                       >
                         {variable}
                       </span>
                     ))}
                     {template.variables.length > 3 && (
-                      <span className="inline-block bg-gray-100 text-gray-600 px-2 py-1 rounded-md text-xs">
+                      <span className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-md text-xs">
                         +{template.variables.length - 3} more
                       </span>
                     )}
@@ -128,11 +141,11 @@ export function Templates() {
                 </button>
                 <button
                   onClick={() => handleCopyTemplate(template)}
-                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                 >
                   <Copy className="w-4 h-4" />
                 </button>
-                <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                <button className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                   <Edit className="w-4 h-4" />
                 </button>
               </div>
@@ -140,12 +153,16 @@ export function Templates() {
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Filter className="w-8 h-8 text-gray-400" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-12 text-center">
+          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Filter className="w-8 h-8 text-gray-400 dark:text-gray-500" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No templates found</h3>
-          <p className="text-gray-600">Try adjusting your search filters or explore other categories.</p>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+            No templates found
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300">
+            Try adjusting your search filters or explore other categories.
+          </p>
         </div>
       )}
 
@@ -153,7 +170,8 @@ export function Templates() {
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-6 text-white text-center">
         <h3 className="text-xl font-bold mb-2">Create Your Own Templates</h3>
         <p className="text-purple-100 mb-4">
-          Transform your best texts into reusable templates and boost your productivity
+          Transform your best texts into reusable templates and boost your
+          productivity
         </p>
         <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-purple-50 transition-colors">
           Create Custom Template
